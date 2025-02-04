@@ -1,4 +1,3 @@
-// cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../models/cart-item.model';
@@ -31,6 +30,11 @@ export class CartService {
     this.cartSubject.next([...this.cartItems]);
   }
 
+  clearCart(): void {
+    this.cartItems = [];
+    this.cartSubject.next([]);
+  }
+
   toggleCart(): void {
     this.isCartOpenSubject.next(!this.isCartOpenSubject.value);
   }
@@ -47,9 +51,7 @@ export class CartService {
     alert(`Proceeding to checkout with ${this.cartItems.length} items`);
   }
 
-  // cart.service.ts
   isInCart(serviceName: string): boolean {
-    // Assuming you store cart items in an array
     return this.cartItems.some((item) => item.serviceName === serviceName);
   }
 }
