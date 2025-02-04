@@ -1,1 +1,280 @@
 /* You can add global styles to this file, and also import other style files */
+/* Base styles */
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+/* Section and card styles */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: #5d87ff;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.service-card {
+  border: 2px solid #5d87ff;
+  border-radius: 10px;
+  padding: 15px;
+  background: white;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Cart Button Styles */
+#cartButton {
+  margin-left: 30px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  background: #5d87ff;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#cartButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#cartCount {
+  background: #ff4444;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 12px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+/* Cart Sidebar Styles */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.cart-sidebar.active {
+  right: 0;
+}
+
+/* Cart Items Styles */
+.cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  gap: 20px;
+}
+
+.cart-item-title {
+  flex: 1;
+  font-size: 15px;
+}
+
+.cart-item-price {
+  font-weight: bold;
+  color: #5d87ff;
+  margin-right: 15px;
+  white-space: nowrap;
+}
+
+.cart-item-remove {
+  color: #ff4444;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.cart-item-remove:hover {
+  transform: scale(1.1);
+}
+
+.cart-total {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px 0;
+  border-top: 2px solid #eee;
+}
+
+/* Overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Service Card Components */
+.recommended {
+  background: #5d87ff;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.header-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.service-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #5d87ff;
+}
+
+.warranty-interval {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.warranty-interval span:not(:first-child) {
+  margin-left: 15px;
+}
+
+.time-tag {
+  background: #e9ecef;
+  color: #555;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.service-list li {
+  background: #e9ecef;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.service-list li::before {
+  content: "✔";
+  color: green;
+  font-weight: bold;
+}
+
+.toggle-button {
+  cursor: pointer;
+  color: #007bff;
+  font-weight: bold;
+  margin-top: 5px;
+  display: block;
+}
+
+.price-section {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Add to Cart Button Styles */
+.add-to-cart {
+  background: #5d87ff;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:not(.added):hover {
+  background: white !important;
+  color: #5d87ff !important;
+  border: 1px solid #5d87ff;
+}
+
+.added {
+  background: #28a745 !important;
+  color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cart-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  #cartButton {
+    right: 10px;
+  }
+
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+}

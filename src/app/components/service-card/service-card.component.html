@@ -1,0 +1,49 @@
+<div class="service-card">
+  <span class="recommended" *ngIf="service.tag === 'Recommended'">{{
+    service.tag
+  }}</span>
+
+  <div class="service-header">
+    <div class="header-left">
+      <img [src]="service.img" [alt]="service.serviceName" width="200" />
+      <div class="service-info">
+        <div class="service-title">{{ service.serviceName }}</div>
+        <div class="warranty-interval">
+          <span *ngFor="let info of service.serviceInfo">• {{ info }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="time-tag">⏳ {{ service.timeTag }}</div>
+  </div>
+
+  <ul class="service-list">
+    <li *ngFor="let item of service.serviceList | slice : 0 : 4">{{ item }}</li>
+    <li
+      *ngFor="let item of service.serviceList | slice : 4"
+      [class.hidden]="!isExpanded"
+    >
+      {{ item }}
+    </li>
+  </ul>
+
+  <!-- <div class="service-card"> -->
+  <!-- Previous content remains same until toggle button -->
+
+  <span class="toggle-button" (click)="toggleServices()">
+    {{
+      isExpanded
+        ? "- " + (service.serviceList.length - 4) + " Show Less"
+        : "+ " + (service.serviceList.length - 4) + " more View All"
+    }}
+  </span>
+
+  <div class="price-section">
+    <span class="original-price">₹{{ service.originalPrice }}</span>
+    <span>₹{{ service.price }}</span>
+    
+    <button class="add-to-cart" [class.added]="isInCart" (click)="addToCart()">
+      {{ isInCart ? "✅ Added in Cart" : "🛒 ADD TO CART" }}
+    </button>
+  </div>
+  <!-- </div> -->
+</div>
