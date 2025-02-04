@@ -199,7 +199,7 @@ export class ServiceCarouselComponent implements AfterViewInit {
       isActive: true,
     },
     {
-      name: 'AC Service & Repair',
+      name: 'AC Service and Repair',
       image: 'assets/images/landing/18.png',
       isActive: false,
     },
@@ -209,12 +209,12 @@ export class ServiceCarouselComponent implements AfterViewInit {
       isActive: false,
     },
     {
-      name: 'Tyres & Wheel Care',
+      name: 'Tyres and Wheel Care',
       image: 'assets/images/landing/15.png',
       isActive: false,
     },
     {
-      name: 'Denting & Painting',
+      name: 'Denting and Painting',
       image: 'assets/images/landing/16.png',
       isActive: false,
     },
@@ -224,7 +224,7 @@ export class ServiceCarouselComponent implements AfterViewInit {
       isActive: false,
     },
     {
-      name: 'Car Spa & Cleaning',
+      name: 'Car Spa and Cleaning',
       image: 'assets/images/landing/10.png',
       isActive: false,
     },
@@ -234,17 +234,17 @@ export class ServiceCarouselComponent implements AfterViewInit {
       isActive: false,
     },
     {
-      name: 'Windshields & Lights',
+      name: 'Windshields and Lights',
       image: 'assets/images/landing/14.png',
       isActive: false,
     },
     {
-      name: 'Suspension & Fitments',
+      name: 'Suspension and Fitments',
       image: 'assets/images/landing/9.png',
       isActive: false,
     },
     {
-      name: 'Clutch & Body Parts',
+      name: 'Clutch and Body Parts',
       image: 'assets/images/landing/11.png',
       isActive: false,
     },
@@ -294,12 +294,14 @@ export class ServiceCarouselComponent implements AfterViewInit {
     }
   }
 
-  /** Updates active service */
+  @Output() categorySelect = new EventEmitter<string>();
+
+  /** Updates active service and emits selected category */
   setActive(selectedService: ServiceItem): void {
     this.services.forEach((service) => {
       service.isActive = service === selectedService;
     });
-    console.log(selectedService);
+    // Emit the selected service name
+    this.categorySelect.emit(selectedService.name);
   }
-
 }

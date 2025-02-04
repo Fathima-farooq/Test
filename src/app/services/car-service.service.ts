@@ -14,4 +14,9 @@ export class CarServiceService {
   getServices(): Observable<ServiceModel[]> {
     return this.http.get<ServiceModel[]>(this.apiUrl);
   }
+
+  getServicesByCategory(category: string) {
+    console.log(category, "from service");
+    return this.http.get(`http://localhost:8080/api/productModels/search/findByCategory?category=${encodeURIComponent(category)}`);
+  }
 }

@@ -14,7 +14,9 @@ interface GroupedServices {
 @Component({
   selector: 'app-root',
   template: `
-    <app-service-carousel></app-service-carousel>
+    <app-service-carousel
+      (categorySelect)="onCategorySelect($event)"
+    ></app-service-carousel>
     <app-cart></app-cart>
     <div class="container mt-1">
       <div *ngFor="let group of Object.entries(groupedServices)">
@@ -47,7 +49,7 @@ export class AppComponent implements OnInit {
       next: (response: any) => {
         this.services = response._embedded.productModels;
         console.log(this.services);
-        alert("preiuer");
+        alert('preiuer');
         this.groupServices();
       },
       error: (error) => {
@@ -64,5 +66,17 @@ export class AppComponent implements OnInit {
       acc[service.serviceHeading].push(service);
       return acc;
     }, {} as GroupedServices);
+  }
+
+  onCategorySelect(category: string) {
+    this.carService.getServicesByCategory(category).subscribe({
+      next: (response: any) => {
+        this.services = response._embedded.productModels;
+        this.groupServices();
+      },
+      error: (error) => {
+        console.error('Error fetching category services:', error);
+      },
+    });
   }
 }
