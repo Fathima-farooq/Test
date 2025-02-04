@@ -19,10 +19,12 @@
     <h5>Your Cart</h5>
     <button class="btn btn-close" (click)="cartService.toggleCart()"></button>
   </div>
-
+  
   <ul class="cart-items">
     <li class="cart-item" *ngFor="let item of cartService.cart$ | async">
-      <span class="cart-item-title">{{ item.serviceName }}</span>
+      <span class="cart-item-title" (click)="scrollToService(item.serviceName)">
+        {{ item.serviceName }}
+      </span>
       <div class="d-flex align-items-center">
         <span class="cart-item-price">₹{{ item.price }}</span>
         <span
