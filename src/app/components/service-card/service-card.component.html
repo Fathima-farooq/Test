@@ -15,16 +15,21 @@
   </div>
 
   <ul class="service-list">
-    <li *ngFor="let item of service.serviceList | slice : 0 : 4">{{ item }}</li>
-    <li
-      *ngFor="let item of service.serviceList | slice : 4"
-      [class.hidden]="!isExpanded"
-    >
-      {{ item }}
+    <li *ngFor="let item of service.serviceList | slice : 0 : 4">
+      {{ item }} oooo
     </li>
+    <ng-container *ngIf="isExpanded">
+      <li *ngFor="let item of service.serviceList | slice : 4">
+        {{ item }} ppp
+      </li>
+    </ng-container>
   </ul>
 
-  <span class="toggle-button" (click)="toggleServices()">
+  <span
+    class="toggle-button"
+    (click)="toggleServices()"
+    style="border: 2px solid black"
+  >
     {{
       isExpanded
         ? "- " + (service.serviceList.length - 4) + " Show Less"

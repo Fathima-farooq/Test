@@ -1,7 +1,7 @@
-// service-card.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ServiceModel } from '../../models/service.model';
 import { CartService } from '../../services/cart.service';
+import { ExpandCollapseService } from '../../services/expand-collapse.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,31 +11,32 @@ import { CommonModule } from '@angular/common';
   templateUrl: './service-card.component.html',
   styles: [
     `
-      .add-to-cart {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        background-color: #007bff;
-        color: white;
-      }
-
-      .add-to-cart.added {
-        background-color: #28a745;
+      .hidden {
+        display: none;
       }
     `,
   ],
 })
-export class ServiceCardComponent {
+export class ServiceCardComponent implements OnInit {
   @Input() service!: ServiceModel;
   isInCart = false;
-  isExpanded = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private expandCollapseService: ExpandCollapseService
+  ) {}
 
   ngOnInit() {
     // Check if this service is already in cart when component initializes
     this.isInCart = this.cartService.isInCart(this.service.serviceName);
+  }
+
+  get isExpanded(): boolean {
+    return this.expandCollapseService.getState(this.service.serviceName);
+  }
+
+  toggleServices(): void {
+    this.expandCollapseService.toggleState(this.service.serviceName);
   }
 
   addToCart(): void {
@@ -49,9 +50,5 @@ export class ServiceCardComponent {
     } else {
       this.cartService.removeFromCart(this.service.serviceName);
     }
-  }
-
-  toggleServices(): void {
-    this.isExpanded = !this.isExpanded;
   }
 }
