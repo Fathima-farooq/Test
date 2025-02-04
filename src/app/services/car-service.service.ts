@@ -7,13 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarServiceService {
-  private apiUrl = 'http://localhost:8080/api/productModels';
 
   constructor(private http: HttpClient) {}
-
-  getServices(): Observable<ServiceModel[]> {
-    return this.http.get<ServiceModel[]>(this.apiUrl);
-  }
 
   getServicesByCategory(category: string) {
     console.log(category, "from service");

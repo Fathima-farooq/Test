@@ -45,17 +45,8 @@ export class AppComponent implements OnInit {
   constructor(private carService: CarServiceService) {}
 
   ngOnInit() {
-    this.carService.getServices().subscribe({
-      next: (response: any) => {
-        this.services = response._embedded.productModels;
-        console.log(this.services);
-        alert('preiuer');
-        this.groupServices();
-      },
-      error: (error) => {
-        console.error('Error fetching services:', error);
-      },
-    });
+    // Use the first category 'Periodic Services' by default
+    this.onCategorySelect('Periodic Services');
   }
 
   private groupServices() {

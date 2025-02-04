@@ -1,7 +1,5 @@
 <div class="service-card">
-  <span class="recommended" *ngIf="service.tag === 'Recommended'">{{
-    service.tag
-  }}</span>
+  <span class="tag" *ngIf="service.tag">{{ service.tag }}</span>
 
   <div class="service-header">
     <div class="header-left">
@@ -37,13 +35,9 @@
   <div class="price-section">
     <span class="original-price">₹{{ service.originalPrice }}</span>
     <span>₹{{ service.price }}</span>
-    
-    <button 
-        class="add-to-cart" 
-        [class.added]="isInCart" 
-        (click)="addToCart()"
-      >
-        {{ isInCart ? "✅ Added in Cart" : "🛒 ADD TO CART" }}
-      </button>
+
+    <button class="add-to-cart" [class.added]="isInCart" (click)="addToCart()">
+      {{ isInCart ? "✅ Added in Cart" : "🛒 ADD TO CART" }}
+    </button>
   </div>
 </div>
