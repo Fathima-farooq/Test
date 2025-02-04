@@ -26,9 +26,6 @@
     </li>
   </ul>
 
-  <!-- <div class="service-card"> -->
-  <!-- Previous content remains same until toggle button -->
-
   <span class="toggle-button" (click)="toggleServices()">
     {{
       isExpanded
@@ -41,9 +38,12 @@
     <span class="original-price">₹{{ service.originalPrice }}</span>
     <span>₹{{ service.price }}</span>
     
-    <button class="add-to-cart" [class.added]="isInCart" (click)="addToCart()">
-      {{ isInCart ? "✅ Added in Cart" : "🛒 ADD TO CART" }}
-    </button>
+    <button 
+        class="add-to-cart" 
+        [class.added]="isInCart" 
+        (click)="addToCart()"
+      >
+        {{ isInCart ? "✅ Added in Cart" : "🛒 ADD TO CART" }}
+      </button>
   </div>
-  <!-- </div> -->
 </div>

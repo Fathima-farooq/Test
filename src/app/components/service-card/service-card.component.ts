@@ -1,5 +1,5 @@
 // service-card.component.ts
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ServiceModel } from '../../models/service.model';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
@@ -9,22 +9,38 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './service-card.component.html',
-  styleUrl: './service-card.component.css',
+  styles: [
+    `
+      .add-to-cart {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+      }
+
+      .add-to-cart.added {
+        background-color: #28a745;
+      }
+    `,
+  ],
 })
 export class ServiceCardComponent {
   @Input() service!: ServiceModel;
-  isExpanded = false;
   isInCart = false;
+  isExpanded = false;
 
-  constructor(private cartService: CartService, private cdr: ChangeDetectorRef) {}
+  constructor(private cartService: CartService) {}
 
-  toggleServices(): void {
-    this.isExpanded = !this.isExpanded;
+  ngOnInit() {
+    // Check if this service is already in cart when component initializes
+    this.isInCart = this.cartService.isInCart(this.service.serviceName);
   }
 
   addToCart(): void {
     this.isInCart = !this.isInCart;
-    console.log('isInCart:', this.isInCart); // Debugging log
+
     if (this.isInCart) {
       this.cartService.addToCart({
         serviceName: this.service.serviceName,
@@ -33,7 +49,9 @@ export class ServiceCardComponent {
     } else {
       this.cartService.removeFromCart(this.service.serviceName);
     }
-    // this.cdr.detectChanges();
-    // this.cdr.markForCheck(); // Use markForCheck instead of detectChanges
+  }
+
+  toggleServices(): void {
+    this.isExpanded = !this.isExpanded;
   }
 }

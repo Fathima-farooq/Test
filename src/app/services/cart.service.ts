@@ -46,4 +46,10 @@ export class CartService {
     }
     alert(`Proceeding to checkout with ${this.cartItems.length} items`);
   }
+
+  // cart.service.ts
+  isInCart(serviceName: string): boolean {
+    // Assuming you store cart items in an array
+    return this.cartItems.some((item) => item.serviceName === serviceName);
+  }
 }

@@ -4,6 +4,8 @@ import {
   ElementRef,
   AfterViewInit,
   HostListener,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -297,5 +299,7 @@ export class ServiceCarouselComponent implements AfterViewInit {
     this.services.forEach((service) => {
       service.isActive = service === selectedService;
     });
+    console.log(selectedService);
   }
+
 }
