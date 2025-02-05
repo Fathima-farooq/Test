@@ -12,8 +12,9 @@ export interface CartItem {
   providedIn: 'root',
 })
 export class CartService {
+  
   private readonly CART_STORAGE_KEY = 'cartItems';
-  private cartItems: CartItem[] = [];
+  public cartItems: CartItem[] = [];
   private cartSubject = new BehaviorSubject<CartItem[]>([]);
   private isCartOpenSubject = new BehaviorSubject<boolean>(false);
 
@@ -92,7 +93,7 @@ export class CartService {
     this.router.navigate(['/checkout']);
   }
 
-  /** Mock Payment Gateway Integration */
+  /** Mock Payment Gateway Integration - runs for 1500sec's*/
   async processPayment(paymentDetails: {
     cardNumber: string;
     expiryDate: string;
@@ -107,9 +108,15 @@ export class CartService {
 
     if (paymentDetails.amount > 0) {
       this.clearCart(); // Clear cart after successful payment
+      this.router.navigate(['/']);
       return { success: true, message: 'Payment processed successfully' };
     }
 
     return { success: false, message: 'Payment failed' };
   }
+
+  // getCartItems(): any{
+  //   const storedCart = localStorage.getItem(this.CART_STORAGE_KEY);
+  //     this.cartItems = JSON.parse(storedCart);
+  // }
 }
